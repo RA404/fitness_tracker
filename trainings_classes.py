@@ -45,7 +45,7 @@ class Running(Training):
         coeff_calorie_2: int = 20
         mean_speed: float = self.get_mean_speed()
         return (
-            (coeff_calorie_1 * mean_speed * coeff_calorie_2)
+            (coeff_calorie_1 * mean_speed - coeff_calorie_2)
             * self.weight
             / self.M_IN_KM
             * self.duration
@@ -60,8 +60,8 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spend_calories(self) -> float:
-        coeff_calorie1: float = 0.35
-        coeff_calorie2: float = 0.29
+        coeff_calorie1: float = 0.035
+        coeff_calorie2: float = 0.029
         mean_speed: float = self.get_mean_speed()
         return (
             coeff_calorie1 * self.weight
