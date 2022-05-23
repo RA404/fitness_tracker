@@ -1,4 +1,4 @@
-# fitness_tracker
+# Fitness tracker
 
 ## Experiments with python OOP
 
