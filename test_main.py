@@ -1,3 +1,6 @@
+from trainings_classes import InfoMessage, Running, SportsWalking, Swimming
+
+
 try:
     import main
 except ModuleNotFoundError:
@@ -10,36 +13,43 @@ except ModuleNotFoundError:
     assert False, 'Module trainings_classes not found'
 
 
+def create_main_message(
+    type_of_training: str,
+    distance: float,
+    duration: float,
+    mean_speed: float,
+    calories_expended: float,
+) -> str:
+    return (
+        f'Type of training: {type_of_training}; '
+        f'Duration: {duration} h.; '
+        f'Distance: {distance} km; '
+        f'Mean speed: {mean_speed} km/h; '
+        f'Calories extended: {calories_expended}.'
+    )
+
+
 def test_main():
     running_object = trainings_classes.Running(15000, 1, 75)
-    assert main.main(running_object) == (
-        'Тип тренировки: Running; '
-        'Длительность: 1 ч.; '
-        'Дистанция: 10.2 км; '
-        'Ср. скорость: 10.2 км/ч; '
-        'Потрачено ккал: 12.27.'
-    )
+    result_message = create_main_message('Running', 10.2, 1, 10.2, 12.27)
+    assert main.main(running_object) == result_message
     running_object1 = trainings_classes.Running(15000, 1.5, 75)
-    assert main.main(running_object1) == (
-        'Тип тренировки: Running; '
-        'Длительность: 1.5 ч.; '
-        'Дистанция: 10.2 км; '
-        'Ср. скорость: 6.8 км/ч; '
-        'Потрачено ккал: 11.52.'
-    )
+    result_message1 = create_main_message('Running', 10.2, 1.5, 6.8, 11.52)
+    assert main.main(running_object1) == result_message1
+
     swimming_object = trainings_classes.Swimming(720, 1, 80, 25, 40)
-    assert main.main(swimming_object) == (
-        'Тип тренировки: Swimming; '
-        'Длительность: 1 ч.; '
-        'Дистанция: 0.994 км; '
-        'Ср. скорость: 1.0 км/ч; '
-        'Потрачено ккал: 336.0.'
-    )
+    result_message = create_main_message('Swimming', 0.994, 1, 1.0, 336.0)
+    assert main.main(swimming_object) == result_message
+
     walking_object = trainings_classes.SportsWalking(9000, 1, 75, 180)
-    assert main.main(walking_object) == (
-        'Тип тренировки: Sport walking; '
-        'Длительность: 1 ч.; '
-        'Дистанция: 6.12 км; '
-        'Ср. скорость: 6.12 км/ч; '
-        'Потрачено ккал: 2.625.'
-    )
+    result_message = create_main_message('Sport walking', 6.12, 1, 6.12, 2.625)
+    assert main.main(walking_object) == result_message
+
+
+def test_read_package():
+    result = main.read_package('SWM', [720, 1, 80, 25, 40])
+    assert isinstance(result, Swimming)
+    result = main.read_package('RUN', [15000, 1, 75])
+    assert isinstance(result, Running)
+    result = main.read_package('WLK', [9000, 1, 75, 180])
+    assert isinstance(result, SportsWalking)
