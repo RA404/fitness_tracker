@@ -1,4 +1,4 @@
-from trainings_classes import InfoMessage, Running, SportsWalking, Swimming
+from trainings_classes import Running, SportsWalking, Swimming
 
 
 try:
@@ -48,8 +48,8 @@ def test_main():
 
 def test_read_package():
     result = main.read_package('SWM', [720, 1, 80, 25, 40])
-    assert isinstance(result, Swimming)
+    assert type(result) == Swimming
     result = main.read_package('RUN', [15000, 1, 75])
-    assert isinstance(result, Running)
+    assert type(result) == Running
     result = main.read_package('WLK', [9000, 1, 75, 180])
-    assert isinstance(result, SportsWalking)
+    assert type(result) == SportsWalking
