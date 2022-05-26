@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from custom_annotation import SubTraining
-from trainings_classes import InfoMessage, Running, SportsWalking, Swimming
+from trainings_classes import (InfoMessage, Running, SportsWalking, Swimming,
+                               Training)
 
 
-def main(training: Optional[SubTraining]):
+def main(training: Training):
     if training is None:
         return "Unexpected type of training!"
     info: InfoMessage = training.show_training_info()
@@ -14,7 +14,7 @@ def main(training: Optional[SubTraining]):
     return message
 
 
-def read_package(workout_type: str, data: List[int]) -> Optional[SubTraining]:
+def read_package(workout_type: str, data: List[int]) -> Optional[Training]:
     action: int = data[0]
     duration: float = data[1]
     weight: float = data[2]
@@ -34,7 +34,7 @@ def read_package(workout_type: str, data: List[int]) -> Optional[SubTraining]:
     }
 
     if workout_type in workout_types:
-        training: SubTraining = workout_types[workout_type]
+        training: Training = workout_types[workout_type]
         return training
     else:
         return None

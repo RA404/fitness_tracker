@@ -1,3 +1,5 @@
+import pytest
+
 from trainings_classes import (InfoMessage, Running, SportsWalking, Swimming,
                                Training)
 
